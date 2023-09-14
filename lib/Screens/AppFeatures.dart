@@ -13,6 +13,7 @@ class AppFeatures extends StatefulWidget {
 class _AppFeaturesState extends State<AppFeatures> {
   final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
+
   int _currentPage = 0;
   @override
   void dispose() {
@@ -22,6 +23,7 @@ class _AppFeaturesState extends State<AppFeatures> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: Stack(alignment: Alignment.bottomCenter, children: [
       PageView(
@@ -77,14 +79,15 @@ class _AppFeaturesState extends State<AppFeatures> {
       Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          
+           const SizedBox(
+            height: 12,
+          ),
           Container(
               width: double.infinity,
               alignment: Alignment.center,
               child:
                   SmoothPageIndicator(controller: _pageController, count: 3)),
-          const SizedBox(
-            height: 12,
-          ),
           Container(
               width: double.infinity,
               child: ElevatedButton(
@@ -105,7 +108,7 @@ class _AppFeaturesState extends State<AppFeatures> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold)))),
           const SizedBox(
-            height: 100,
+            height: 45,
           ),
         ],
       )
