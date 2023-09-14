@@ -7,7 +7,7 @@ class FirstFeature extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.blue,
+      color: Colors.black,
     );
   }
 }
