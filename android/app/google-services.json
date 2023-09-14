@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807134587669",
+    "project_id": "aflam-app-f26c9",
+    "storage_bucket": "aflam-app-f26c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807134587669:android:b456c98847e116e8bd571c",
+        "android_client_info": {
+          "package_name": "com.example.aflam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJhOP9Te0xeCYfDYXUubGM9KA4kG-7Wv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
