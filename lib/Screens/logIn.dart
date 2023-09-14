@@ -96,6 +96,7 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                   SizedBox(height: deviceSize.height * 0.02),
+                  SizedBox(height: deviceSize.height * 0.02),
                   Container(
                     height: deviceSize.height * 0.07,
                     width: deviceSize.width * 0.45,
