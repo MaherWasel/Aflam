@@ -18,6 +18,13 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+    final titleTheme = GoogleFonts.quicksand(
+      textStyle: const TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(),
