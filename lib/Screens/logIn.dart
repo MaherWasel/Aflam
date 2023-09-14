@@ -38,6 +38,7 @@ class _LogInPageState extends State<LogInPage> {
             // ),
             Text(
               "Welcome Aflam!",
+              style: titleTheme,
             ),
             SizedBox(height: deviceSize.height * 0.1),
             Form(
