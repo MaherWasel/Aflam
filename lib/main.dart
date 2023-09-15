@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/Home.dart';
 import 'package:aflam/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     brightness: Brightness.dark,
-    seedColor: Color.fromRGBO(65, 67, 66, 1001),
+    seedColor: Color.fromARGB(22, 66, 65, 67),
   ),
   textTheme: GoogleFonts.latoTextTheme(),
 );
@@ -27,7 +28,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: StartingAppScreen(),
+      home: HomeScreen(),
     );
   }
 }
