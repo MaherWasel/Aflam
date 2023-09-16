@@ -2,6 +2,7 @@ import 'package:aflam/Screens/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -55,6 +56,13 @@ class _LogInPageState extends State<LogInPage> {
         setState(() {
           _isUploading = false;
         });
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+            child: const HomeScreen(),
+            type: PageTransitionType.topToBottom,
+          ),
+        );
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
