@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget{
@@ -41,6 +42,12 @@ class HomeDrawer extends StatelessWidget{
            ListTile(
             title: Text("About Us"),
             onTap: (){},
+          ),
+          ListTile(
+            title: Text("Sign Out"),
+            onTap: (){
+              FirebaseAuth.instance.signOut();
+            },
           )
         ]),
     );

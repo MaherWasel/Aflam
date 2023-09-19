@@ -6,11 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 
-final  topTenMovies = Provider((ref) async {
+final  fanFavorites = Provider((ref) async {
     List<Movie> listOfMovies=[];
 
   final uri =
-      Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getWeekTop10');
+      Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getFanFavorites');
   final headers= {
     'X-RapidAPI-Key': '78a465d2d5msha8b5827db0bfdaep1241e6jsnc9f77831407e',
     'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
@@ -20,7 +20,7 @@ final  topTenMovies = Provider((ref) async {
     return listOfMovies;
   }
 
-  final List<dynamic> data = jsonDecode(response.body)["data"];
+  final List<dynamic> data = jsonDecode(response.body)["data"]["list"];
   
   for (int i=0;i<data.length;i++){
     listOfMovies.add(Movie(id: data[i]["id"], isAdult:data[i]["isAdult"]=="false"?false:true , 

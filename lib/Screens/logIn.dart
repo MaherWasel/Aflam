@@ -56,13 +56,7 @@ class _LogInPageState extends State<LogInPage> {
         setState(() {
           _isUploading = false;
         });
-        Navigator.pushReplacement(
-          context,
-          PageTransition(
-            child: const HomeScreen(),
-            type: PageTransitionType.topToBottom,
-          ),
-        );
+        
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -89,7 +83,7 @@ class _LogInPageState extends State<LogInPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomeScreen();
+            return  const HomeScreen();
           }
           return Scaffold(
             appBar: AppBar(),

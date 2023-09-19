@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class StartingAppScreen extends StatefulWidget {
+  const StartingAppScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
