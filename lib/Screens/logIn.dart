@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:aflam/Screens/Home.dart';
 import 'package:aflam/Widgets/imagePicker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -48,6 +50,9 @@ class _LogInPageState extends State<LogInPage> {
       setState(() {
         _isUploading = true;
       });
+
+    
+      
       if (_isLogin) {
         await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
@@ -55,8 +60,25 @@ class _LogInPageState extends State<LogInPage> {
           _isUploading = false;
         });
       } else {
-        await _firebase.createUserWithEmailAndPassword(
+        final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
+        final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('user_images')
+          .child('${userCredentials.user!.uid}.jpg');
+          await storageRef.putFile(_selectedImage!);  
+  final imageUrl = await storageRef.getDownloadURL();
+          await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredentials.user!.uid)
+          .set({
+        'username': _enteredUsername,
+          'email': _enteredEmail,
+        'imageUrl': imageUrl,
+      });
+
+      
+
 
         setState(() {
           _isUploading = false;
