@@ -61,7 +61,6 @@ class _LogInPageState extends State<LogInPage> {
         setState(() {
           _isUploading = false;
         });
-
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
