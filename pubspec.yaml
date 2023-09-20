@@ -46,6 +46,7 @@ dependencies:
   image_picker: ^1.0.4
   firebase_storage: ^11.2.7
   cloud_firestore: ^4.9.2
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
@@ -75,8 +76,8 @@ flutter:
     - assets/images/ExploreIcon.png
     - assets/images/ReviewIcon.png
     - assets/images/commentIcon.png
-
-
+    - assets/images/kfupm.gif
+    - assets/images/linkedin.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

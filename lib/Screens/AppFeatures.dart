@@ -7,22 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class AppFeatures extends StatefulWidget {
-  const AppFeatures({super.key});
-
-  @override
-  State<AppFeatures> createState() => _AppFeaturesState();
-}
-
-class _AppFeaturesState extends State<AppFeatures> {
+class AppFeatures extends StatelessWidget {
   final PageController _pageController = PageController(initialPage: 0);
 
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.dispose();
-  }
-
+  AppFeatures({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

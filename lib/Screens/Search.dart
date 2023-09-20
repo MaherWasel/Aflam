@@ -68,12 +68,15 @@ class _SearchState extends ConsumerState<Search> {
         body: loading
             ? CircularProgressIndicator()
             : ListView.builder(
+                scrollDirection: Axis.horizontal,
+
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.all(8),
-                    height: 250,
-                    width: double.infinity,
+                    margin: const EdgeInsets.all(8),
+                    height: 400,
+                    
+                    width: 300,
                     child: Image.network(
                       list[index].imageUrl,
                       fit: BoxFit.fill,
