@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:aflam/Screens/Home.dart';
+import 'package:aflam/Widgets/imagePicker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:image_picker/image_picker.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -14,6 +19,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
+
   final buttonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
   );
@@ -32,6 +38,7 @@ class _LogInPageState extends State<LogInPage> {
   var _enteredEmail = '';
   var _enteredPassword = '';
   var _enteredUsername = '';
+  File? _selectedImage;
 
   void _submit() async {
     final isVaild = _formKey.currentState!.validate();
@@ -43,6 +50,9 @@ class _LogInPageState extends State<LogInPage> {
       setState(() {
         _isUploading = true;
       });
+
+    
+      
       if (_isLogin) {
         await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
@@ -50,13 +60,29 @@ class _LogInPageState extends State<LogInPage> {
           _isUploading = false;
         });
       } else {
-        await _firebase.createUserWithEmailAndPassword(
+        final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
+        final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('user_images')
+          .child('${userCredentials.user!.uid}.jpg');
+          await storageRef.putFile(_selectedImage!);  
+  final imageUrl = await storageRef.getDownloadURL();
+          await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredentials.user!.uid)
+          .set({
+        'username': _enteredUsername,
+          'email': _enteredEmail,
+        'imageUrl': imageUrl,
+      });
+
+      
+
 
         setState(() {
           _isUploading = false;
         });
-        
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -83,24 +109,26 @@ class _LogInPageState extends State<LogInPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return  const HomeScreen();
+            return const HomeScreen();
           }
           return Scaffold(
             appBar: AppBar(),
             body: Center(
               child: SingleChildScrollView(
                 child: Column(
+                
                   children: [
-                    // I will to this tommorow...
-
-                    // Container(
-                    //   child: Image.asset("assets/images/user.png"),
-                    // ),
+                    
                     Text(
                       _isLogin ? "Welcome Aflam!" : "SignUp!",
                       style: titleTheme,
                     ),
-                    SizedBox(height: deviceSize.height * 0.1),
+                    SizedBox(height: deviceSize.height * 0.05),
+                     
+                    UserImagePicker(onPickImage: (pickedImage) {
+                      _selectedImage = pickedImage;
+                    },),
+                    // SizedBox(height: deviceSize.height * 0.1),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -239,9 +267,12 @@ class _LogInPageState extends State<LogInPage> {
                                     style: buttonStyle,
                                     onPressed: _submit,
                                     child: Text(
-                                      _isLogin ? "LogIn" : "SignUp",
+                                      _isLogin ? "Login" : "SignUp",
                                       style:
-                                          const TextStyle(color: Colors.white),
+                                          GoogleFonts.quicksand(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                 ),

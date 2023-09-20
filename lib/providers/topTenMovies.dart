@@ -23,12 +23,16 @@ final  topTenMovies = Provider((ref) async {
   final List<dynamic> data = jsonDecode(response.body)["data"];
   
   for (int i=0;i<data.length;i++){
-    listOfMovies.add(Movie(id: data[i]["id"], isAdult:data[i]["isAdult"]=="false"?false:true , 
+    listOfMovies.add(Movie(id: data[i]["id"], 
+    isAdult:data[i]["isAdult"]=="false"?false:true , 
     orginalTitleText: data[i]["originalTitleText"]["text"], 
-    imageId: data[i]["primaryImage"]["id"], imageUrl: data[i]["primaryImage"]["imageUrl"], 
+    imageId: data[i]["primaryImage"]["id"],
+     imageUrl: data[i]["primaryImage"]["imageUrl"], 
     IMDBRate: data[i]["ratingsSummary"]["aggregateRating"], 
-    worldRank: data[i]["ratingsSummary"]["topRanking"]==null?"":data[i]["ratingsSummary"]["topRanking"]["rank"], voters: data[i]["ratingsSummary"]["voteCount"], 
-    releaseYear: data[i]["releaseYear"]["year"], streamingOptions: {}, 
+    worldRank: data[i]["ratingsSummary"]["topRanking"]==null?"":data[i]["ratingsSummary"]["topRanking"]["rank"],
+     voters: data[i]["ratingsSummary"]["voteCount"], 
+    releaseYear: data[i]["releaseYear"]["year"], 
+    streamingOptions: {}, 
     plot: data[i]["plot"]["plotText"]["plainText"], releaseDate: []));
       
     
