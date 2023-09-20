@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/Search.dart';
 import 'package:aflam/Widgets/FanFavorites.dart';
 import 'package:aflam/Widgets/HomeDrawer.dart';
 import 'package:aflam/Widgets/Top10PageView.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: IconButton(
                   onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Search(),));
                   },
                   icon: const Icon(Icons.search)),
             )

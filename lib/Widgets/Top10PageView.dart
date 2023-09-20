@@ -31,7 +31,15 @@ class Top10PageView extends ConsumerWidget{
           }
           else if (snapshot.hasData){
             List<Movie> movies=snapshot.data!;
-            
+            if (movies.isEmpty){
+              return Center(
+                child: Text("Api not Loading",
+                style: GoogleFonts.lato(
+                  fontSize: 32,
+                  color: Colors.white
+                )),
+              );
+            }
             return Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
