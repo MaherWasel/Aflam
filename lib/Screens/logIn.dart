@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -19,7 +18,6 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
-
   final buttonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
   );
@@ -51,8 +49,6 @@ class _LogInPageState extends State<LogInPage> {
         _isUploading = true;
       });
 
-    
-      
       if (_isLogin) {
         await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
@@ -63,22 +59,19 @@ class _LogInPageState extends State<LogInPage> {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
         final storageRef = FirebaseStorage.instance
-          .ref()
-          .child('user_images')
-          .child('${userCredentials.user!.uid}.jpg');
-          await storageRef.putFile(_selectedImage!);  
-  final imageUrl = await storageRef.getDownloadURL();
-          await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userCredentials.user!.uid)
-          .set({
-        'username': _enteredUsername,
+            .ref()
+            .child('user_images')
+            .child('${userCredentials.user!.uid}.jpg');
+        await storageRef.putFile(_selectedImage!);
+        final imageUrl = await storageRef.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredentials.user!.uid)
+            .set({
+          'username': _enteredUsername,
           'email': _enteredEmail,
-        'imageUrl': imageUrl,
-      });
-
-      
-
+          'imageUrl': imageUrl,
+        });
 
         setState(() {
           _isUploading = false;
@@ -116,18 +109,18 @@ class _LogInPageState extends State<LogInPage> {
             body: Center(
               child: SingleChildScrollView(
                 child: Column(
-                
                   children: [
-                    
                     Text(
                       _isLogin ? "Welcome Aflam!" : "SignUp!",
                       style: titleTheme,
                     ),
                     SizedBox(height: deviceSize.height * 0.05),
-                     
-                    UserImagePicker(onPickImage: (pickedImage) {
-                      _selectedImage = pickedImage;
-                    },),
+
+                    UserImagePicker(
+                      onPickImage: (pickedImage) {
+                        _selectedImage = pickedImage;
+                      },
+                    ),
                     // SizedBox(height: deviceSize.height * 0.1),
                     Form(
                       key: _formKey,
@@ -268,11 +261,10 @@ class _LogInPageState extends State<LogInPage> {
                                     onPressed: _submit,
                                     child: Text(
                                       _isLogin ? "Login" : "SignUp",
-                                      style:
-                                          GoogleFonts.quicksand(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      style: GoogleFonts.quicksand(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

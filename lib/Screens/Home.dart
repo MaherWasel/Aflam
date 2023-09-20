@@ -2,17 +2,12 @@ import 'package:aflam/Screens/Search.dart';
 import 'package:aflam/Widgets/FanFavorites.dart';
 import 'package:aflam/Widgets/HomeDrawer.dart';
 import 'package:aflam/Widgets/Top10PageView.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-
-
- 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,7 +18,11 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: IconButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Search(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Search(),
+                        ));
                   },
                   icon: const Icon(Icons.search)),
             )
@@ -34,28 +33,19 @@ class HomeScreen extends StatelessWidget {
           children: [
             Center(
               child: Text("Week TopTen",
-                  style: GoogleFonts.lato(
-                    fontSize: 32,
-                    color: Colors.white
-                  )),
+                  style: GoogleFonts.lato(fontSize: 32, color: Colors.white)),
+            ),
+            const SizedBox(height: 200, width: 400, child: Top10PageView()),
+            Center(
+              child: Text(
+                "Fan Favorites",
+                style: GoogleFonts.lato(fontSize: 32, color: Colors.white),
+              ),
             ),
             const SizedBox(
-              height: 200,
-              width: 400,
-              child: Top10PageView()
+              height: 16,
             ),
-            Center(
-              child: Text("Fan Favorites",
-                  style: GoogleFonts.lato(
-                    fontSize: 32,
-                    color: Colors.white
-                  ),),
-            ),
-             
-               const SizedBox(
-                child: FanFavorites())
-            
-            
+            const FanFavorites()
           ],
         ));
   }

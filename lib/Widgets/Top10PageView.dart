@@ -5,39 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
-  
-
-class Top10PageView extends ConsumerWidget{
+class Top10PageView extends ConsumerWidget {
   const Top10PageView({super.key});
 
-
-
-
-  
-  
-
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-      
-    
-      return FutureBuilder <List<Movie>>(
-        future: ref.read(topTenMovies), 
-        builder: 
-        (context, snapshot) {
-          if (snapshot.connectionState==ConnectionState.waiting){
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FutureBuilder<List<Movie>>(
+        future: ref.read(topTenMovies),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
-          }
-          else if (snapshot.hasData){
-            List<Movie> movies=snapshot.data!;
-            if (movies.isEmpty){
+          } else if (snapshot.hasData) {
+            List<Movie> movies = snapshot.data!;
+            if (movies.isEmpty) {
               return Center(
-                child: Text("Api not Loading",
-                style: GoogleFonts.lato(
-                  fontSize: 32,
-                  color: Colors.white
-                )),
+                child: Text("Failed to load TOP10",
+                    style: GoogleFonts.lato(
+                        fontSize: 32, color: Colors.deepPurple)),
               );
             }
             return Expanded(
@@ -46,24 +30,21 @@ class Top10PageView extends ConsumerWidget{
                   shrinkWrap: true,
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
-                    
                     return Container(
                       margin: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Image.network(movies[index].imageUrl,fit: BoxFit.fill),
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image.network(movies[index].imageUrl,
+                            fit: BoxFit.fill),
                       ),
                     );
-                  }
-                  
-                ),
+                  }),
             );
           }
           return Text("data");
         });
-
   }
 }
