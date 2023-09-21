@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: "Favorites")
           ],
         ),
-        drawer: const HomeDrawer(),
+        drawer:  HomeDrawer(),
         body: screens[_selectedPageIndex]);
   }
 }

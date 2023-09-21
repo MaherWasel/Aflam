@@ -18,7 +18,7 @@ class FavoriteMoviesScreen extends StatelessWidget{
             return Center(
               child: SizedBox(
                 height: 100,
-                width: 100,
+                width: 120,
                 child: CircularProgressIndicator()));
           }
           else  if (snapshot.hasData){
