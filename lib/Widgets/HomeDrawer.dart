@@ -6,17 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class HomeDrawer extends StatelessWidget{
-   HomeDrawer({super.key});
-
+  const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Drawer(
       width: 220,
-      child: Column(
-        children: [
+      child: Column(children: [
           DrawerHeader(
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -34,18 +32,14 @@ class HomeDrawer extends StatelessWidget{
               builder: (context, snapshot) {
                 if (snapshot.connectionState==ConnectionState.waiting){
                   return CircularProgressIndicator();
-
                 }
                 else {
-                  final imageUrl=snapshot.data!["imageUrl"];
-                  return SizedBox(
-                    width: double.infinity,
-                    child: CircleAvatar(
-                      radius: 100,
-                      backgroundImage: Image.network(imageUrl,fit: BoxFit.fitHeight,).image),
-                  );
-                }
-              },)
+                  final info=snapshot.data;
+                return CircleAvatar(
+                  radius: 100,
+                  backgroundImage: Image.network(info!["imageUrl"]).image);
+              }}
+            )
               ),
           const SizedBox(
             height: 6,
