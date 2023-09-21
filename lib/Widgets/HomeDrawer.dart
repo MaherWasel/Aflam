@@ -11,9 +11,11 @@ class HomeDrawer extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    
     return Drawer(
       width: 220,
-      child: Column(children: [
+      child: Column(
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
