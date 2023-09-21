@@ -11,7 +11,7 @@ final fanFavorites = Provider((ref) async {
   final uri =
       Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getFanFavorites');
   final headers = {
-    'X-RapidAPI-Key': '9dc371acd9mshe6c14d130bdf29dp1ada06jsn40545a8b415b',
+    'X-RapidAPI-Key': '41b87bd778msh19e22822335f615p19d5e8jsn55dfbea1859f',
     'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
   };
   final response = await http.get(uri!, headers: headers);

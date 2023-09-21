@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/DetailedMovie.dart';
 import 'package:aflam/Widgets/top10PageView.dart';
 import 'package:aflam/models/movie.dart';
 import 'package:aflam/providers/topTenMovies.dart';
@@ -37,8 +38,14 @@ class Top10PageView extends ConsumerWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(25),
-                        child: Image.network(movies[index].imageUrl,
-                            fit: BoxFit.fill),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(context, 
+                            MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: movies[index]),));
+                          },
+                          child: Image.network(movies[index].imageUrl,
+                              fit: BoxFit.fill),
+                        ),
                       ),
                     );
                   }),

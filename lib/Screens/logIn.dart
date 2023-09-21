@@ -62,6 +62,7 @@ class _LogInPageState extends State<LogInPage> {
             .ref()
             .child('user_images')
             .child('${userCredentials.user!.uid}.jpg');
+          
         await storageRef.putFile(_selectedImage!);
         final imageUrl = await storageRef.getDownloadURL();
         await FirebaseFirestore.instance
@@ -102,7 +103,7 @@ class _LogInPageState extends State<LogInPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return  HomeScreen();
           }
           return Scaffold(
             appBar: AppBar(),

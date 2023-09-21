@@ -8,9 +8,9 @@ class Movie {
   final worldRank;
   final voters;
   final releaseYear;
-  Map<String,String> streamingOptions;
+  final streamingOptions;
   String plot;
-  List<int> releaseDate;
+  final releaseDate;
   Movie({required this.id,required this.isAdult, required this.orginalTitleText,required this.imageId,
   required this.imageUrl,required this.IMDBRate,required this.worldRank,required this.voters,
   required this.releaseYear,required this.streamingOptions,required this.plot,required this.releaseDate});

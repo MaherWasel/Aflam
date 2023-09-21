@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/DetailedMovie.dart';
 import 'package:aflam/providers/SearchedMovies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -77,9 +78,15 @@ class _SearchState extends ConsumerState<Search> {
                     height: 400,
                     
                     width: 300,
-                    child: Image.network(
-                      list[index].imageUrl,
-                      fit: BoxFit.fill,
+                    child: InkWell(
+                      onTap: () {
+                          Navigator.push(context, 
+                            MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: list[index]),));
+                      },
+                      child: Image.network(
+                        list[index].imageUrl,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   );
                 }));

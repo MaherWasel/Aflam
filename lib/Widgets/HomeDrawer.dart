@@ -45,7 +45,7 @@ class HomeDrawer extends StatelessWidget{
             onTap: (){
               Navigator.push(context, 
               PageTransition(
-                duration: Duration(milliseconds: 650),
+                duration: Duration(milliseconds: 520),
                 type: PageTransitionType.leftToRight,
                 child: AboutUs()));
             },
