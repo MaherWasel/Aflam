@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/detailedMovie.dart';
 import 'package:aflam/models/movie.dart';
 import 'package:aflam/providers/FanFavoriteMovies.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,16 @@ class FanFavorites extends ConsumerWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
-                      child: Image.network(
-                        movies[index].imageUrl,
-                        fit: BoxFit.fill,
-                        scale: 0.7,
+                      child: InkWell(
+                        onTap: () {
+                        Navigator.push(context, 
+                        MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: movies[index]),));
+                        },
+                        child: Image.network(
+                          movies[index].imageUrl,
+                          fit: BoxFit.fill,
+                          scale: 0.7,
+                        ),
                       ),
                     ),
                   );

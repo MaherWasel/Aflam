@@ -1,3 +1,4 @@
+import 'package:aflam/Screens/FavoriteMovies.dart';
 import 'package:aflam/Screens/Search.dart';
 import 'package:aflam/Widgets/FanFavorites.dart';
 import 'package:aflam/Widgets/HomeDrawer.dart';
@@ -5,31 +6,25 @@ import 'package:aflam/Widgets/Top10PageView.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+   HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Search(),
-                        ));
-                  },
-                  icon: const Icon(Icons.search)),
-            )
-          ],
-        ),
-        drawer: const HomeDrawer(),
-        body: ListView(
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedPageIndex=0;
+  bool favoritesScreen=false;
+  void _selectPage(int index){
+    setState(() {
+      _selectedPageIndex=index;
+      favoritesScreen=!favoritesScreen;
+    });
+
+  }
+  final List<Widget> screens=[
+    ListView(
           children: [
             Center(
               child: Text("Week TopTen",
@@ -47,6 +42,43 @@ class HomeScreen extends StatelessWidget {
             ),
             const FanFavorites()
           ],
-        ));
+        ),
+        FavoriteMoviesScreen()
+
+  ];
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+        appBar: AppBar(
+          actions: [
+             Padding(
+              padding: const EdgeInsets.all(8),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Search(),
+                        ));
+                  },
+                  icon: const Icon(Icons.search)),
+            )
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectPage,
+          currentIndex: _selectedPageIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.movie),
+              label: "Home"),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.star),
+              label: "Favorites")
+          ],
+        ),
+        drawer: const HomeDrawer(),
+        body: screens[_selectedPageIndex]);
   }
 }

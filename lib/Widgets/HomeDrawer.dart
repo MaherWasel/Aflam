@@ -79,7 +79,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: (){
               Navigator.push(context, 
               PageTransition(
-                duration: Duration(milliseconds: 650),
+                duration: Duration(milliseconds: 520),
                 type: PageTransitionType.leftToRight,
                 child: AboutUs()));
             },
