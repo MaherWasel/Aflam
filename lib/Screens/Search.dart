@@ -24,7 +24,12 @@ class _SearchState extends ConsumerState<Search> {
     }
     _formKey.currentState!.save();
     setState(()  {
-       ref.read(searchedMoviesProvider.notifier).search(_inputSearch);
+       var input=_inputSearch.split(" ");
+       String text="";
+       for (int i=0;i<input.length;i++){
+          text+=input[i];
+       }
+       ref.read(searchedMoviesProvider.notifier).search(text);
     });
   }
 
