@@ -51,7 +51,9 @@ class Top10PageView extends ConsumerWidget {
                   }),
             );
           }
-          return Text("data");
+          return  Text("Failed to load TOP10",
+                    style: GoogleFonts.lato(
+                        fontSize: 32, color: Colors.deepPurple));
         });
   }
 }

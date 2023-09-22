@@ -16,7 +16,6 @@ class Search extends ConsumerStatefulWidget {
 
 class _SearchState extends ConsumerState<Search> {
   final _formKey = GlobalKey<FormState>();
-  bool loading = false;
   String _inputSearch = "";
   void _search() {
     final isVaild = _formKey.currentState!.validate();
@@ -24,10 +23,8 @@ class _SearchState extends ConsumerState<Search> {
       return;
     }
     _formKey.currentState!.save();
-    setState(() {
-      loading = true;
-      ref.read(searchedMoviesProvider.notifier).search(_inputSearch);
-      loading = false;
+    setState(()  {
+       ref.read(searchedMoviesProvider.notifier).search(_inputSearch);
     });
   }
 
@@ -39,56 +36,69 @@ class _SearchState extends ConsumerState<Search> {
           actions: [
             IconButton(onPressed: _search, icon: const Icon(Icons.search))
           ],
-          title: Form(
-              key: _formKey,
-              child: TextFormField(
-                style: GoogleFonts.lato(
-                    color: Colors.deepPurpleAccent, fontSize: 24),
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(8),
-                  label: Container(
-                    transform: Matrix4.translationValues(0.0, -15.0, 0.0),
-                    child: Text(
-                      "Search",
-                      style:
-                          GoogleFonts.lato(color: Colors.white, fontSize: 30),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value == "") {
-                    return "please enter valid input";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _inputSearch = newValue!;
-                },
-              )),
+        
         ),
-        body: loading
-            ? CircularProgressIndicator()
-            : ListView.builder(
-                scrollDirection: Axis.horizontal,
-
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 400,
-                    
-                    width: 300,
-                    child: InkWell(
-                      onTap: () {
-                          Navigator.push(context, 
-                            MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: list[index]),));
-                      },
-                      child: Image.network(
-                        list[index].imageUrl,
-                        fit: BoxFit.fill,
+        body:Column(
+              children: [
+                Form(
+              key: _formKey,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.deepPurpleAccent
+                  )
+                ),
+                child: TextFormField(
+                  style: GoogleFonts.lato(
+                      color: Colors.deepPurpleAccent, fontSize: 24),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(8),
+                    label: Container(
+                      transform: Matrix4.translationValues(0.0, -15.0, 0.0),
+                      child: Text(
+                        "Search",
+                        style:
+                            GoogleFonts.lato(color: Colors.white, fontSize: 30),
                       ),
                     ),
-                  );
-                }));
+                  ),
+                  validator: (value) {
+                    if (value == null || value == "") {
+                      return "please enter valid input";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _inputSearch = newValue!;
+                  },
+                ),
+              )),
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.all(8),
+                          height: 400,
+                          
+                          width: 300,
+                          child: InkWell(
+                            onTap: () {
+                                Navigator.push(context, 
+                                  MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: list[index]),));
+                            },
+                            child: Image.network(
+                              list[index].imageUrl,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ));
   }
 }

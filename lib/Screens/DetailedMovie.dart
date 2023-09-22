@@ -25,9 +25,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
     if (isFav){
       FirebaseFirestore.instance.collection("favoriteMovies").doc(userCredential!.uid).collection("movie")
       .doc(ref).delete();
-      setState(() {
-        isFav=false;
-      });
+     
       return;
     
     }
@@ -45,9 +43,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
         
         }
       );
-    setState(() {
-      isFav=true;
-    });
+
     }
     else if (widget.movie.runtimeType.toString()=="Movie"){
 
@@ -68,9 +64,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
       "releaseDate":widget.movie.releaseDate
 
      });
-     setState(() {
-       isFav=true;
-     });
+    
     }
     
   
@@ -99,8 +93,19 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
             }
             return Scaffold(
               appBar: AppBar(
-              actions: [IconButton(icon: Icon(isFav? Icons.star:Icons.star_border),
-              onPressed: addToFavorite,)],
+              actions: [
+                StatefulBuilder(builder: (context, setState) {
+                  return IconButton(
+                    icon: Icon(isFav?Icons.star:Icons.star_border),
+                    onPressed: (){
+                      setState(() {
+                        addToFavorite();
+                        isFav=!isFav;
+
+                      });
+                    }, );
+                },)
+              ],
                         ),
                         
               body: Column(

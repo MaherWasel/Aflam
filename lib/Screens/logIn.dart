@@ -117,7 +117,8 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     SizedBox(height: deviceSize.height * 0.05),
 
-                    UserImagePicker(
+                    if (!_isLogin)
+                      UserImagePicker(
                       onPickImage: (pickedImage) {
                         _selectedImage = pickedImage;
                       },

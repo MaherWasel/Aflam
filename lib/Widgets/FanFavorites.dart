@@ -58,8 +58,11 @@ class FanFavorites extends ConsumerWidget {
                 });
           }
           return Center(
-            child: Text("Error Ocuured when loading fan Favorites",
-                style: GoogleFonts.lato(color: Colors.white, fontSize: 32)),
+            child: Text(
+                  "failed to load FanFavorites",
+                  style:
+                      GoogleFonts.lato(color: Colors.deepPurple, fontSize: 32),
+                ),
           );
         });
   }
