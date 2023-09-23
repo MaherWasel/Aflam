@@ -1,16 +1,14 @@
-# aflam
+# ![Aflam](https://github.com/MaherWasel/Aflam/assets/132270545/15a4b1c0-437c-4e8a-acc7-ded87cc6339e)
+# Aflam
+<table>
+<tr>
+<td>
+  Aflam is an app that lets users see the top 10 and fan-favorite 50 movies/series that update weekly, and search for anyone they desire through the search bar.
+  Also, users can see the rank of movies/series, add them to their list of favorite movies/series, and  see and comment on the comment section of every movie/series
+</td>
+</tr>
+</table>
 
-A new Flutter project.
+## Built with 
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://flutter.dev/) 
