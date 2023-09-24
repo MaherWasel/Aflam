@@ -7,78 +7,77 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedPageIndex=0;
-  bool favoritesScreen=false;
-  void _selectPage(int index){
+  int selectedPageIndex = 0;
+  bool favoritesScreen = false;
+  void _selectPage(int index) {
     setState(() {
-      _selectedPageIndex=index;
-      favoritesScreen=!favoritesScreen;
+      selectedPageIndex = index;
+      favoritesScreen = !favoritesScreen;
     });
-
   }
-  final List<Widget> screens=[
-    ListView(
-          children: [
-            Center(
-              child: Text("Week TopTen",
-                  style: GoogleFonts.lato(fontSize: 32, color: Colors.white)),
-            ),
-            const SizedBox(height: 200, width: 400, child: Top10PageView()),
-            Center(
-              child: Text(
-                "Fan Favorites",
-                style: GoogleFonts.lato(fontSize: 32, color: Colors.white),
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const FanFavorites()
-          ],
-        ),
-        FavoriteMoviesScreen()
 
+  final List<Widget> screens = [
+    ListView(
+      children: [
+        Center(
+          child: Text("Week TopTen",
+              style: GoogleFonts.lato(fontSize: 32, color: Colors.white)),
+        ),
+        const SizedBox(height: 200, width: 400, child: Top10PageView()),
+        Center(
+          child: Text(
+            "Fan Favorites",
+            style: GoogleFonts.lato(fontSize: 32, color: Colors.white),
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        const FanFavorites()
+      ],
+    ),
+    FavoriteMoviesScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-             Padding(
-              padding: const EdgeInsets.all(8),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Search(),
-                        ));
-                  },
-                  icon: const Icon(Icons.search)),
-            )
-          ],
-        ),
+        appBar: selectedPageIndex == screens.length - 1
+            ? AppBar(
+                title: const Text("Your Favorite Movies!"),
+              )
+            : AppBar(
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Search(),
+                              ));
+                        },
+                        icon: const Icon(Icons.search)),
+                  )
+                ],
+              ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: _selectPage,
-          currentIndex: _selectedPageIndex,
+          currentIndex: selectedPageIndex,
           items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.movie),
-              label: "Home"),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.star),
-              label: "Favorites")
+            BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favorites")
           ],
         ),
-        drawer:  HomeDrawer(),
-        body: screens[_selectedPageIndex]);
+        drawer: HomeDrawer(),
+        body: screens[selectedPageIndex]);
   }
 }

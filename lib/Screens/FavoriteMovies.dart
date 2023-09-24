@@ -1,4 +1,5 @@
 import 'package:aflam/Screens/DetailedMovie.dart';
+import 'package:aflam/Widgets/favoriteMovie.dart';
 import 'package:aflam/models/Movie.dart';
 import 'package:aflam/models/SearchedMovie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class FavoriteMoviesScreen extends StatelessWidget {
   final userCredential = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -61,7 +63,10 @@ class FavoriteMoviesScreen extends StatelessWidget {
                                   DetailedMovieScreen(movie: movie),
                             ));
                       },
-                      child: Image.network(data[index]["imageUrl"]));
+                      child: SingleChildScrollView(
+                        child: FavoriteMovieWidget(
+                            imageUrl: data[index]['imageUrl']),
+                      ));
                 });
           } else {
             return Text("ddw");
