@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class MovieDetail extends StatelessWidget {
   final String imageUrl;
   final String movieName;
-  final int worldRank;
-  final int yearReleased;
+  final worldRank;
+  final yearReleased;
 
   const MovieDetail({
     super.key,

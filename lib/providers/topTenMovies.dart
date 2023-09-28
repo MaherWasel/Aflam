@@ -11,7 +11,7 @@ final topTenMovies = Provider((ref) async {
   final uri =
       Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getWeekTop10');
   final headers = {
-    'X-RapidAPI-Key': '41b87bd778msh19e22822335f615p19d5e8jsn55dfbea1859f',
+    'X-RapidAPI-Key': '043d8361a9msh20c71cf2b52300cp140cffjsna388d0d0085a',
     'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
   };
   final response = await http.get(uri!, headers: headers);
