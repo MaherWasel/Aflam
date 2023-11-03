@@ -40,6 +40,12 @@ class _StartingAppScreenState extends State<StartingAppScreen>
             duration: const Duration(milliseconds: 550),
             child: AppFeatures()));
   }
+  @override
+  void dispose(){
+    super.dispose();
+    _iconAnimation.dispose();
+    _textAnimation.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

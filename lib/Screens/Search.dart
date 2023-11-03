@@ -13,6 +13,7 @@ class Search extends ConsumerStatefulWidget {
   }
 }
 
+
 class _SearchState extends ConsumerState<Search> {
   final _formKey = GlobalKey<FormState>();
   String _inputSearch = "";

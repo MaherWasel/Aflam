@@ -17,7 +17,7 @@ class LogInPage extends StatefulWidget {
   State<LogInPage> createState() => _LogInPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _LogInPageState extends State<LogInPage>  {
   final buttonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
   );

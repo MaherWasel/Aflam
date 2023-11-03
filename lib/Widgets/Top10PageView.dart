@@ -1,6 +1,6 @@
+
 import 'package:aflam/Screens/DetailedMovie.dart';
 import 'package:aflam/models/movie.dart';
-import 'package:aflam/providers/FanFavoriteMovies.dart';
 import 'package:aflam/providers/topTenMovies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,8 +46,12 @@ class Top10PageView extends ConsumerWidget {
                                 isSearch: false,
                                 movie: movies[index]),));
                             },
-                            child: Image.network(movies[index].imageUrl,
-                                fit: BoxFit.cover),
+                            child: Image.network(
+                              
+                              movies[index].imageUrl,
+                              cacheWidth: 120,
+                              cacheHeight: 200,
+                                fit: BoxFit.fill),
                           ),
                         ),
                       

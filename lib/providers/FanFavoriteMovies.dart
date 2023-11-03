@@ -9,18 +9,18 @@ final fanFav = Provider((ref) async {
   List<Movie> listOfMovies = [];
 
   final uri =
-      Uri.tryParse("https://imdb188.p.rapidapi.com/api/v1/getFanFavorites");
+      Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getFanFavorites');
   final headers = {
-    'X-RapidAPI-Key': 'b208eec911mshcf2bbc911339699p19588cjsn4fa2db4a3d06',
+    'X-RapidAPI-Key': '8f79bdb236msh9e95bef31f5fbb1p1fa0eejsne34b5d1b9034',
     'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
   };
-  final response = await http.get(uri!, headers: headers,
-  );
+  final response = await http.get(uri!, headers: headers);
   if (response.statusCode != 200) {
     return listOfMovies;
   }
 
   final List<dynamic> data = jsonDecode(response.body)["data"]["list"];
+  
   for (int i = 0; i < data.length; i++) {
     try{
     listOfMovies.add(Movie(
@@ -34,9 +34,11 @@ final fanFav = Provider((ref) async {
             : data[i]["ratingsSummary"]["topRanking"]["rank"],
         releaseYear: data[i]["releaseYear"]["year"],
         plot: data[i]["plot"]["plotText"]["plainText"],
-      ));}
-    catch (e) {
-    }
+        ));}
+        catch(e){
+
+  }
+
   }
   return listOfMovies;
 });

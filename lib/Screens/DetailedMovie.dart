@@ -65,15 +65,11 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
       "id":widget.movie.id,
       "isAdult":widget.movie.isAdult,
       "orginalTitleText":widget.movie.orginalTitleText,
-      "imageId":widget.movie.imageId,
       "imageUrl":widget.movie.imageUrl,
       "IMDBRate":widget.movie.IMDBRate,
       "worldRank":widget.movie.worldRank,
-      "voters":widget.movie.voters,
       "releaseYear":widget.movie.releaseYear,
-      "streamingOptions":widget.movie.streamingOptions,
       "plot":widget.movie.plot,
-      "releaseDate":widget.movie.releaseDate
 
      });
     

@@ -33,9 +33,9 @@ class HomeDrawer extends StatelessWidget{
               ).snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState==ConnectionState.waiting){
-                  return SizedBox(
+                  return const SizedBox(
                     width: double.infinity,
-                    child: const CircularProgressIndicator());
+                    child: CircularProgressIndicator());
 
                 }
                 else {

@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         drawer:  const HomeDrawer(),
         body: _selectedPageIndex==0?
-        Column(
+        ListView(
           children: [
                 Center(
                   child: Text("Week TopTen",
@@ -70,9 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 
-                const Expanded(
-                  child: FanFavorites())
-
+                FanFavorites()
+        
               ],
            
         ):
