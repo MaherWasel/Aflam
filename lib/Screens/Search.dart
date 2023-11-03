@@ -70,7 +70,11 @@ class _SearchState extends ConsumerState<Search> {
                     return null;
                   },
                   onSaved: (newValue) {
-                    _inputSearch = newValue!;
+                    var list=newValue!.split(" ");
+                    for (int i=0;i<list.length;i++){
+                      _inputSearch+=list[i];
+                          
+                    }
                   },
                 ),
               )),

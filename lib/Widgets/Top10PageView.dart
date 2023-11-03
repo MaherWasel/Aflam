@@ -7,10 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Top10PageView extends ConsumerWidget {
-  const Top10PageView({super.key});
+   Top10PageView({super.key});
+  ScrollController _scrollController = ScrollController();
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     return FutureBuilder<List<Movie>>(
         future: ref.read(topTenMovies),
         builder: (context, snapshot) {
@@ -24,11 +27,13 @@ class Top10PageView extends ConsumerWidget {
             
             return 
                ListView.builder(
+                  controller: _scrollController,
                   addAutomaticKeepAlives: true,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
+                    
                     return Container(
                       height: 100,
                       margin: const EdgeInsets.all(10),
