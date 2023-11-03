@@ -9,7 +9,6 @@ class Search extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
-    // TODO: implement createState
     return _SearchState();
   }
 }
@@ -24,12 +23,7 @@ class _SearchState extends ConsumerState<Search> {
     }
     _formKey.currentState!.save();
     setState(()  {
-       var input=_inputSearch.split(" ");
-       String text="";
-       for (int i=0;i<input.length;i++){
-          text+=input[i];
-       }
-       ref.read(searchedMoviesProvider.notifier).search(text);
+       ref.read(searchedMoviesProvider.notifier).search(_inputSearch);
     });
   }
 
@@ -85,6 +79,13 @@ class _SearchState extends ConsumerState<Search> {
                 
                       itemCount: list.length,
                       itemBuilder: (context, index) {
+                        if (list.isEmpty){
+                          return(
+                            Center(
+                              child: Text("Start Searching !"),
+                            )
+                          );
+                        }
                         return Container(
                           margin: const EdgeInsets.all(8),
                           height: 400,
@@ -93,7 +94,9 @@ class _SearchState extends ConsumerState<Search> {
                           child: InkWell(
                             onTap: () {
                                 Navigator.push(context, 
-                                  MaterialPageRoute(builder: (context) => DetailedMovieScreen(movie: list[index]),));
+                                  MaterialPageRoute(builder: (context) => DetailedMovieScreen(
+                                    movie: list[index],
+                                    isSearch: true,),));
                             },
                             child: Image.network(
                               list[index].imageUrl,

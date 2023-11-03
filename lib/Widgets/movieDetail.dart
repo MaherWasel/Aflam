@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class MovieDetail extends StatelessWidget {
   final String imageUrl;
   final String movieName;
-  final worldRank;
-  final yearReleased;
+  final int worldRank;
+  final int yearReleased;
 
   const MovieDetail({
     super.key,
@@ -29,13 +29,13 @@ class MovieDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                   width: deviceData.width * 0.4,
                   child: Image.network(imageUrl)),
               SizedBox(
                 width: deviceData.width * 0.05,
               ),
-              Container(
+              SizedBox(
                 width: deviceData.width * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

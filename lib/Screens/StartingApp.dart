@@ -37,7 +37,7 @@ class _StartingAppScreenState extends State<StartingAppScreen>
         context,
         PageTransition(
             type: PageTransitionType.leftToRight,
-            duration: Duration(milliseconds: 550),
+            duration: const Duration(milliseconds: 550),
             child: AppFeatures()));
   }
 
@@ -77,7 +77,7 @@ class _StartingAppScreenState extends State<StartingAppScreen>
                   style: GoogleFonts.lato(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 123, 189, 222)),
+                      color: const Color.fromARGB(255, 123, 189, 222)),
                 ))
           ],
         ),

@@ -6,15 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class HomeDrawer extends StatelessWidget{
-  const HomeDrawer({super.key});
+   const HomeDrawer({super.key});
+
 
   @override
   Widget build(BuildContext context) {
+    
     return Drawer(
       width: 220,
-      child: Column(children: [
+      child: Column(
+        children: [
           DrawerHeader(
-            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -33,21 +35,25 @@ class HomeDrawer extends StatelessWidget{
                 if (snapshot.connectionState==ConnectionState.waiting){
                   return SizedBox(
                     width: double.infinity,
-                    child: CircularProgressIndicator());
+                    child: const CircularProgressIndicator());
+
                 }
                 else {
-                  final info=snapshot.data;
-                return CircleAvatar(
-                  radius: 100,
-                  backgroundImage: Image.network(info!["imageUrl"]).image);
-              }}
-            )
+                  final imageUrl=snapshot.data!["imageUrl"];
+                  return SizedBox(
+                    width: double.infinity,
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundImage: Image.network(imageUrl,fit: BoxFit.fitHeight,).image),
+                  );
+                }
+              },)
               ),
           const SizedBox(
             height: 6,
           ),
            ListTile(
-            title: Text("Profile"),
+            title: const Text("Profile"),
             onTap: (){
               
             },
@@ -56,17 +62,17 @@ class HomeDrawer extends StatelessWidget{
             height: 6,
           ),
            ListTile(
-            title: Text("About Us"),
+            title: const Text("About Us"),
             onTap: (){
               Navigator.push(context, 
               PageTransition(
-                duration: Duration(milliseconds: 520),
+                duration: const Duration(milliseconds: 520),
                 type: PageTransitionType.leftToRight,
-                child: AboutUs()));
+                child: const AboutUs()));
             },
           ),
           ListTile(
-            title: Text("Sign Out"),
+            title: const Text("Sign Out"),
             onTap: (){
               FirebaseAuth.instance.signOut();
             },

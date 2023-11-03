@@ -81,7 +81,7 @@ class _LogInPageState extends State<LogInPage> {
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.message ?? "Authentication Flaied")));
+          SnackBar(content: Text(error.message ?? "Authentication Failed")));
       setState(() {
         _isUploading = false;
       });
@@ -103,7 +103,7 @@ class _LogInPageState extends State<LogInPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return  HomeScreen();
+            return  const HomeScreen();
           }
           return Scaffold(
             appBar: AppBar(),

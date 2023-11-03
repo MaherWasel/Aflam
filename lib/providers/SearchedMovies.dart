@@ -14,7 +14,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<SearchedMovie>> {
     final uri = Uri.https(
         'imdb188.p.rapidapi.com', "/api/v1/searchIMDB", {"query": input});
     final response = await http.get(uri, headers: {
-      'X-RapidAPI-Key': '043d8361a9msh20c71cf2b52300cp140cffjsna388d0d0085a',
+      'X-RapidAPI-Key': 'b208eec911mshcf2bbc911339699p19588cjsn4fa2db4a3d06',
       'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
     });
 
@@ -22,6 +22,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<SearchedMovie>> {
       state = [];
       return;
     }
+    
 
     final List<dynamic> data = jsonDecode(response.body)["data"];
     for (int i = 0; i < data.length; i++) {
@@ -29,7 +30,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<SearchedMovie>> {
         ...state,
         SearchedMovie(
             id: data[i]["id"],
-            title: data[i]["title"],
+            orginalTitleText: data[i]["title"],
             year: data[i]["year"],
             stars: data[i]["stars"],
             imageUrl: data[i]["image"])

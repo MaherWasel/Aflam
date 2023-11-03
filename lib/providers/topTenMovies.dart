@@ -11,7 +11,7 @@ final topTenMovies = Provider((ref) async {
   final uri =
       Uri.tryParse('https://imdb188.p.rapidapi.com/api/v1/getWeekTop10');
   final headers = {
-    'X-RapidAPI-Key': '043d8361a9msh20c71cf2b52300cp140cffjsna388d0d0085a',
+    'X-RapidAPI-Key': 'b208eec911mshcf2bbc911339699p19588cjsn4fa2db4a3d06',
     'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
   };
   final response = await http.get(uri!, headers: headers);
@@ -26,17 +26,14 @@ final topTenMovies = Provider((ref) async {
         id: data[i]["id"],
         isAdult: data[i]["isAdult"] == "false" ? false : true,
         orginalTitleText: data[i]["originalTitleText"]["text"],
-        imageId: data[i]["primaryImage"]["id"],
         imageUrl: data[i]["primaryImage"]["imageUrl"],
         IMDBRate: data[i]["ratingsSummary"]["aggregateRating"],
         worldRank: data[i]["ratingsSummary"]["topRanking"] == null
             ? ""
             : data[i]["ratingsSummary"]["topRanking"]["rank"],
-        voters: data[i]["ratingsSummary"]["voteCount"],
         releaseYear: data[i]["releaseYear"]["year"],
-        streamingOptions: {},
         plot: data[i]["plot"]["plotText"]["plainText"],
-        releaseDate: []));
+        ));
   }
   return listOfMovies;
 });
