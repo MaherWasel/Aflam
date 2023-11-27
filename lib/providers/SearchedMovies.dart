@@ -14,7 +14,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<SearchedMovie>> {
     final uri = Uri.https(
         'imdb188.p.rapidapi.com', "/api/v1/searchIMDB", {"query": input});
     final response = await http.get(uri, headers: {
-      'X-RapidAPI-Key': '8f79bdb236msh9e95bef31f5fbb1p1fa0eejsne34b5d1b9034',
+      'X-RapidAPI-Key': '9dc371acd9mshe6c14d130bdf29dp1ada06jsn40545a8b415b',
       'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
     });
 

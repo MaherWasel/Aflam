@@ -53,7 +53,7 @@ class _SearchState extends ConsumerState<Search> {
                   style: GoogleFonts.lato(
                       color: Colors.deepPurpleAccent, fontSize: 24),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(8),
+                    contentPadding: const EdgeInsets.all(8),
                     label: Container(
                       transform: Matrix4.translationValues(0.0, -15.0, 0.0),
                       child: Text(
@@ -79,35 +79,56 @@ class _SearchState extends ConsumerState<Search> {
                 ),
               )),
                 Expanded(
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                
+                  child: GridView.builder(
+                      scrollDirection: Axis.vertical,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
                       itemCount: list.length,
                       itemBuilder: (context, index) {
                         if (list.isEmpty){
                           return(
-                            Center(
-                              child: Text("Start Searching !"),
+                             Center(
+                              child: Text("Start Searching !",
+                              style: GoogleFonts.lato(
+                                color: Colors.white,
+                              ),),
                             )
                           );
                         }
-                        return Container(
-                          margin: const EdgeInsets.all(8),
-                          height: 400,
-                          
-                          width: 300,
-                          child: InkWell(
+                        return InkWell(
                             onTap: () {
                                 Navigator.push(context, 
                                   MaterialPageRoute(builder: (context) => DetailedMovieScreen(
                                     movie: list[index],
                                     isSearch: true,),));
                             },
-                            child: Image.network(
-                              list[index].imageUrl,
-                              fit: BoxFit.fill,
+                            child: Container(
+                              margin: const EdgeInsets.all(8),
+                              
+                              width: 100,
+                              height: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadiusDirectional.circular(20),
+                                child: Image.network(
+                                  list[index].imageUrl,
+                                  fit: BoxFit.fill,
+                                  loadingBuilder: (BuildContext context, Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );}
+                                ),
+                              ),
                             ),
-                          ),
+                          
                         );
                       }),
                 ),

@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
 class Top10PageView extends ConsumerWidget {
    Top10PageView({super.key});
-  ScrollController _scrollController = ScrollController();
 
 
   @override
@@ -27,7 +28,6 @@ class Top10PageView extends ConsumerWidget {
             
             return 
                ListView.builder(
-                  controller: _scrollController,
                   addAutomaticKeepAlives: true,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,

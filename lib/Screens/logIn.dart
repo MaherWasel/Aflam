@@ -86,6 +86,9 @@ class _LogInPageState extends State<LogInPage>  {
         _isUploading = false;
       });
     }
+    setState(() {
+      _isUploading=false;
+    });
   }
 
   @override

@@ -30,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text("Week TopTen",
               style: GoogleFonts.lato(fontSize: 32, color: Colors.white)),
         ),
-         SizedBox(height: 200, width: 400, child: Top10PageView()),
+         SizedBox(
+          height: 200, width: 400, 
+          child: Top10PageView()),
         Center(
           child: Text(
             "Fan Favorites",

@@ -25,7 +25,11 @@ class FavoriteMoviesScreen extends StatelessWidget{
           }
           if (snapshot.hasData){
             final data=snapshot.data!.docs;
-            return ListView.builder(
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
               itemCount: data.length,
               itemBuilder:(context, index) {
                 
@@ -57,7 +61,34 @@ class FavoriteMoviesScreen extends StatelessWidget{
                             isSearch: !(data[index]["type"]=="Movie"),
                             ),));
                   },
-                  child: Image.network(data[index]["imageUrl"]));
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    width: 100,
+                    height: 120,
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.network(
+                        data[index]["imageUrl"],
+                        fit: BoxFit.fill,
+                        loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
+                        
+                      
+                      
+                      )
+                    ),
+                  ));
               }
             );
           }

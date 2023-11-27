@@ -37,7 +37,15 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
     if (isFav){
       FirebaseFirestore.instance.collection("favoriteMovies").doc(userCredential!.uid).collection("movie")
       .doc(ref).delete();
-     
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        backgroundColor: Color.fromARGB(255, 52, 46, 53),
+        content: Text("The Movie is removed from the the list of Favorites!",
+        style: GoogleFonts.lato(
+          color: const Color.fromARGB(255, 211, 203, 224),
+          fontSize: 18
+        ),)
+        ));
       return;
     
     }
@@ -75,8 +83,15 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
     
     }
     
-  
-    }
+      ScaffoldMessenger.of(context).clearSnackBars();
+ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        backgroundColor: Color.fromARGB(255, 52, 46, 53),
+        content: Text("The Movie is added to the the list of Favorites!",
+        style: GoogleFonts.lato(
+          color: const Color.fromARGB(255, 211, 203, 224),
+          fontSize: 18
+        ),)
+        ));    }
   
   @override
   Widget build(BuildContext context) {
@@ -105,7 +120,16 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
               actions: [
                 StatefulBuilder(builder: (context, setState) {
                   return IconButton(
-                    icon: Icon(isFav?Icons.star:Icons.star_border),
+                    icon: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 400),
+                      transitionBuilder: (child, animation) {
+                        return RotationTransition(turns: animation,child: child,);
+                      },
+                      
+                      child: Icon(
+                        
+                        isFav?Icons.star:Icons.star_border,
+                        key: ValueKey(isFav),)),
                     onPressed: (){
                       setState(() {
                         addToFavorite();
@@ -122,7 +146,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                 Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 3),
+                      margin: const EdgeInsets.only(left: 3),
                       
                       width: 210,
                       height: 300,
@@ -191,7 +215,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                       ))
                   ],
                 ),
-                widget.isSearch?Text(""): Container(
+                widget.isSearch?const Text(""): Container(
                   margin: const EdgeInsets.all(8),
                   padding: const EdgeInsets.all(8.0),
                   child: Text(widget.movie.plot,
@@ -209,7 +233,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                 ),
                 Row(children: [
                   Container(
-                    margin: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
                     width: 258,
                     child: TextField(
                       maxLength: 50,
@@ -234,26 +258,26 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                   stream: FirebaseFirestore.instance.collection("comments").doc(widget.movie.id).collection("comment").orderBy("createdAt",descending: false).snapshots(), 
                   builder:(context, snapshot) {
                     if (snapshot.connectionState==ConnectionState.waiting){
-                      return CircularProgressIndicator();
+                      return const Text("");
                     }
                     else if (snapshot.hasData){
                     final list=snapshot.data!.docs;
                     return Expanded(
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: list.length,
                         reverse: true,
                         itemBuilder:(context, index) {
                           return Container(
-                            margin: EdgeInsets.all(8),
+                            margin: const EdgeInsets.all(8),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Color.fromARGB(255, 227, 203, 203),Color.fromARGB(255, 244, 220, 220),const Color.fromARGB(255, 160, 140, 140)])
+                                colors: [Color.fromARGB(255, 227, 203, 203),Color.fromARGB(255, 244, 220, 220),Color.fromARGB(255, 160, 140, 140)])
                             ),
                             height: 100,
                             child: Row(
@@ -276,10 +300,12 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.all(10),
+                                                margin: const EdgeInsets.all(10),
                                                 child: ClipRRect(
                                                   borderRadius: BorderRadius.circular(45),
-                                                  child: Image.network(link,scale: 2,fit: BoxFit.cover,))),
+                                                  child: Image.network(
+                                                    link,scale: 2,fit: BoxFit.cover,
+                                                    ))),
                                               Column(
                                     children: [
                                       Text(name.toUpperCase(),
@@ -297,7 +323,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                                             ],
                                           );
                                     }
-                                    return Text("");
+                                    return const Text("");
                                   },),
 
                                 
@@ -305,7 +331,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                             ));
                         },));
                     }
-                    return Text("fuck you");
+                    return const Text("you");
                   },)
             ],
           ),
